@@ -1,0 +1,25 @@
+    public class FirstPersonController : MonoBehaviour
+    {
+        
+        //子弹预设体
+        public GameObject BulletPre;
+        //子弹射出点
+        public Transform BulletPoint;
+        //攻击间隔
+        public float CD = 0.5f;
+        private float timer = 0;
+        
+
+        // Update is called once per frame
+        private void Update()
+        {
+           
+
+            //攻击
+            timer += Time.deltaTime;
+            if (Input.GetMouseButton(0) && timer > CD)
+            {
+                timer = 0;//创建子弹
+                Instantiate(BulletPre, BulletPoint.position, BulletPoint.rotation);
+            }
+        }
