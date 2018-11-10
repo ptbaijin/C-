@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BOT : MonoBehaviour {
+    private GameObject  player;
+
+    public int Hp = 100;
+    public GameObject GUN;
+    public GameObject GAN;
+
+    public Vector3 m;
+
+    public Vector3 n;
+
+
+    private void Update()
+    {
+        float dis = Vector3.Distance(GUN.transform.position, GAN.transform.position);
+        if (dis < 5f)
+        {
+            Destroy(gameObject);
+        }else if(dis<10)
+        {
+            transform.LookAt(GUN.transform);
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "Bullet")
+        {
+            Hp -= 30;
+            if(Hp<=0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+}
